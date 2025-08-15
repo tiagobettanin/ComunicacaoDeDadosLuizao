@@ -1,0 +1,17 @@
+Canais de comuniação
+
+TCP/P
+
+OSI
+    camadas
+        aplicacão - MAIS PROXIMA DO USER
+        apresentaão - compresão de dados e etc
+        sessão - entre o receptor e o teanmisor
+        trnsporte   - como vai ser feito qual pacote
+        rede - endereço e gerar a rota
+        enlace - dividir em frames para cana de comuniçaõ, controle de fluxo eerro
+        FÍSICA - cerne da diciplima, sinak, multipelxação, modulaçõa, nivel de bit e etc
+
+    e encia para o recepior que começa pelo outro lado fisica, enlace, = vamos ver mais enlace e a fisica
+
+
