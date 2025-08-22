@@ -7,3 +7,47 @@ largura de banda maior mais vits
 poucas harmonicas pode ter problema com o receptor pq pode não interder certo
 largura influencia na taxa de banda e na qualidade
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+100x10^-3=0,1s
+
+1T - 360
+1/6 - x
+
+4 - 
+
+t-1/f   =1*10000 = 10^-4
+lambda = C. t3*10^8 * 10^-4
+30km    velocidade da luz
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
