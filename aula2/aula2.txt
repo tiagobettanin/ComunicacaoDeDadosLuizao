@@ -1,0 +1,9 @@
+pq tem que ser impares harminicas
+pq o grafio do periododico é dquele jeito e o ñ é dquele
+ver sobre largura de banda
+caso1   1harmonica 1mHz 10^6 oscilaç~eos/ciclsx2bits= 2x10^6b/ser
+o bis é  a topo e minimod o grafico
+largura de banda maior mais vits
+poucas harmonicas pode ter problema com o receptor pq pode não interder certo
+largura influencia na taxa de banda e na qualidade
+
