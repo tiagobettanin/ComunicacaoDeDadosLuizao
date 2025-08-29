@@ -1,0 +1,4 @@
+atenuação: f mais altos se atenu masi rapido
+            f mais vaixo atenua menos
+            podemos aumentar a potencia mas aumenta oconsumo
+            
