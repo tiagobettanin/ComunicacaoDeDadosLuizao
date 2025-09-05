@@ -1,0 +1,53 @@
+Com base nas aulas sobre "Sinais" e "Capacidade do Canal", este texto explora os fundamentos da comunicação de dados, desde a natureza dos sinais até os fatores que limitam a velocidade e a qualidade da transmissão.
+
+### **Sinais: A Base da Comunicação de Dados**
+
+[cite_start]A comunicação de dados é o processo de troca de informações entre dispositivos por meio de um meio de transmissão[cite: 1222]. [cite_start]Essa troca acontece através de um sistema que inclui um transmissor, um canal de comunicação e um receptor[cite: 1215, 1239, 1241, 1247]. [cite_start]A informação a ser transmitida, seja ela analógica (contínua, como a voz humana) ou digital (discreta, como dados de computador), é convertida em sinais elétricos ou eletromagnéticos para viajar pelo meio[cite: 1220, 1221, 1252].
+
+Os sinais podem ser classificados como:
+* [cite_start]**Analógicos:** Assumem uma gama infinita de valores ao longo do tempo[cite: 1260].
+* [cite_start]**Digitais:** Apresentam um número limitado de valores definidos[cite: 1260].
+
+[cite_start]A forma mais fundamental de um sinal periódico é a **onda senoidal** [cite: 1339][cite_start], caracterizada por sua **amplitude** (intensidade), **frequência** (número de ciclos por segundo) e **fase** (deslocamento em relação ao tempo)[cite: 1275, 1276].
+
+[cite_start]De acordo com a análise de Fourier, qualquer sinal, inclusive um sinal digital, pode ser decomposto em uma soma de múltiplas ondas senoidais, chamadas de harmônicas[cite: 1417, 1418]. [cite_start]Um sinal digital, como uma onda quadrada, é formado pela superposição de uma onda senoidal (a frequência fundamental) com infinitas harmônicas ímpares[cite: 1419]. Quanto mais harmônicas forem utilizadas, mais fielmente o sinal original é representado, o que melhora a qualidade e a interpretação pelo receptor.
+
+[cite_start]A **largura de banda** (bandwidth) de um sinal é a diferença entre a maior e a menor frequência que o compõem[cite: 1522]. [cite_start]Uma largura de banda maior permite a inclusão de mais harmônicas, resultando em um sinal de maior qualidade e, consequentemente, em uma maior taxa de transmissão de dados[cite: 1584].
+
+### **Imperfeições na Transmissão: Os Desafios do Mundo Real**
+
+[cite_start]Os meios de transmissão não são perfeitos, o que causa a degradação do sinal entre o transmissor e o receptor[cite: 810, 812]. As três principais causas dessa degradação são:
+
+1.  [cite_start]**Atenuação:** É a perda de energia do sinal conforme ele viaja pelo meio de transmissão[cite: 818, 820]. [cite_start]Essa perda é mais acentuada em frequências mais altas[cite: 821]. [cite_start]Para compensar a atenuação, são utilizados amplificadores para sinais analógicos e repetidores para sinais digitais[cite: 824]. [cite_start]A atenuação é medida em **decibéis (dB)**, onde um valor negativo indica perda de potência[cite: 838, 840]. [cite_start]Uma perda de 3 dB, por exemplo, significa que o sinal perdeu metade de sua potência[cite: 844].
+
+2.  [cite_start]**Distorção:** Ocorre quando a forma do sinal se altera durante a transmissão[cite: 953]. [cite_start]Isso acontece porque as diferentes componentes de frequência de um sinal podem viajar a velocidades distintas, chegando ao destino com atrasos variados e, portanto, fora de fase[cite: 954, 955].
+
+3.  [cite_start]**Ruído:** É qualquer sinal indesejado que se sobrepõe ao sinal original, sendo o principal fator limitante no desempenho dos sistemas de comunicação[cite: 967, 1257]. Existem vários tipos de ruído:
+    * [cite_start]**Ruído Térmico:** Gerado pela agitação de elétrons, está presente em todos os meios eletrônicos e não pode ser completamente eliminado[cite: 982, 983, 985].
+    * [cite_start]**Ruído de Intermodulação:** Ocorre quando sinais de diferentes frequências compartilham o mesmo meio, criando sinais indesejados que são a soma ou a diferença das frequências originais[cite: 993, 994].
+    * [cite_start]**Crosstalk:** É a interferência entre canais de comunicação fisicamente próximos, como fios em um cabo[cite: 999, 1001].
+    * **Ruído por Impulso:** São picos de energia irregulares e de curta duração, geralmente causados por fontes externas, como raios ou máquinas. [cite_start]É um dos principais causadores de erros em transmissões digitais[cite: 1004, 1005, 1009].
+
+[cite_start]A **Relação Sinal-Ruído (SNR)** é uma medida que compara a potência do sinal desejado com a potência do ruído de fundo[cite: 1049]. [cite_start]Uma SNR alta indica um sinal de melhor qualidade, menos afetado pelo ruído[cite: 1054, 1058].
+
+### **Capacidade do Canal: Limites Teóricos da Transmissão**
+
+[cite_start]A velocidade máxima com que os dados podem ser transmitidos por um canal é limitada por fatores como a largura de banda, os níveis de sinal e o nível de ruído[cite: 1080]. Duas teorias fundamentais estabelecem os limites para a taxa de dados:
+
+* [cite_start]**Taxa de Transferência de Nyquist (para canais sem ruído):** Harry Nyquist estabeleceu que a taxa máxima de bits é o dobro do produto da largura de banda pela quantidade de níveis de sinal[cite: 1091]. A fórmula é:
+    $$Taxa~de~Transfer\hat{e}ncia = 2 \times Largura~de~Banda \times \log_{2}(L)$$
+    [cite_start]Onde *L* é o número de níveis de sinal[cite: 1091, 1092]. [cite_start]Aumentar o número de níveis permite enviar mais bits por vez, mas exige que o receptor seja mais sofisticado para distingui-los, o que pode reduzir a confiabilidade[cite: 1094, 1098].
+
+* [cite_start]**Capacidade de Shannon (para canais com ruído):** Claude Shannon determinou a capacidade máxima teórica de um canal em bits por segundo, considerando a largura de banda e o ruído térmico[cite: 1135, 1137]. A fórmula é:
+    $$Capacidade = Largura~de~Banda \times \log_{2}(1 + SNR)$$
+    A capacidade de Shannon nos dá o limite superior para a taxa de dados em um canal ruidoso. [cite_start]Para aumentar essa capacidade, é necessário aumentar a largura de banda ou melhorar a relação sinal-ruído[cite: 1141, 1142].
+
+[cite_start]Na prática, ambas as fórmulas são combinadas para determinar a taxa de transferência e os níveis de sinal apropriados para um determinado canal[cite: 1144].
+
+### **Medidas de Desempenho**
+
+Além da capacidade teórica, o desempenho de uma rede é avaliado por outras métricas:
+
+* [cite_start]**Throughput:** Mede a taxa real de transferência de dados que pode ser alcançada na rede, que é sempre menor ou igual à largura de banda[cite: 1158, 1159].
+* [cite_start]**Latência:** É o tempo total que uma mensagem leva para viajar da origem ao destino[cite: 1162]. [cite_start]Ela é composta pelo tempo de propagação (distância/velocidade), tempo de transmissão (tamanho da mensagem/largura de banda), tempo de fila e tempo de processamento nos dispositivos intermediários[cite: 1163, 1164, 1165, 1175].
+* **Jitter:** Refere-se à variação no atraso da chegada dos pacotes de dados. [cite_start]É um problema crítico para aplicações em tempo real, como áudio e vídeo, que são sensíveis a essas variações[cite: 1160].

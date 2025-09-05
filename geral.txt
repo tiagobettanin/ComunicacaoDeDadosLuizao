@@ -1,4 +1,4 @@
-------------------Aula0------------------
+------------------Aula0-Slide1------------------
 Canais de comuniação
 
 TCP/P
@@ -17,7 +17,7 @@ OSI
 
 
 
-------------------Aula1------------------
+------------------Aula1-Slide1------------------
 pq tem que ser impares harminicas
 pq o grafio do periododico é dquele jeito e o ñ é dquele
 ver sobre largura de banda
@@ -39,8 +39,10 @@ t-1/f   =1*10000 = 10^-4
 lambda = C. t3*10^8 * 10^-4
 30km    velocidade da luz
 
-------------------Aula2------------------
+------------------Aula2-Slide02------------------
 atenuação: f mais altos se atenu masi rapido
             f mais vaixo atenua menos
             podemos aumentar a potencia mas aumenta oconsumo
-            
+
+------------------Aula3-Slide02------------------
+ver mais sobre frequencia e taxa de amostragrem
