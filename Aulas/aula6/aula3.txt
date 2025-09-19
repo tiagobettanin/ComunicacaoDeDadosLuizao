@@ -10,5 +10,10 @@ lambda = v*T
 lambda = 2,9145 metros
 
 
+4-QAM = 2 bits por sinal
+8-QAM = 3 bits por sinal
+
+
+
 
 
