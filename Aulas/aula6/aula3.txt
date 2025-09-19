@@ -1,0 +1,14 @@
+`Para antena dipolo
+102.9MHz
+
+antena = lambda/2
+antena = 2,9145/2
+antena = 1,577 metros
+
+lambda = v*T
+= 3*10^8*9,718*10^-9
+lambda = 2,9145 metros
+
+
+
+
