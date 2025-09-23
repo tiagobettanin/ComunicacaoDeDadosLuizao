@@ -1,6 +1,6 @@
-### Análise Detalhada das Histórias de Usuário
+### Análise Técnica Refinada das Histórias de Usuário
 
-Aqui está o detalhamento de cada funcionalidade, desde a concepção e planejamento técnico até os testes de validação.
+Este documento detalha o plano técnico para a implementação das funcionalidades, consolidando os requisitos, o planejamento de arquitetura e os critérios de validação.
 
 ---
 
@@ -11,46 +11,43 @@ Aqui está o detalhamento de cada funcionalidade, desde a concepção e planejam
 ### 1. Planejamento (Planning)
 
 #### Design de Interface (UI/UX)
-
-* **Botão de Criação:** Posicionar um botão de destaque `"Criar Desafio"` na tela social ou no perfil do usuário.
-* **Formulário de Criação:** Desenhar um modal ou uma nova tela para o formulário do desafio, contendo os campos: `Nome do Desafio` (texto), `Meta` (número e unidade, ex: "km", "horas", "vezes") e `Data de Término` (seletor de data).
-* **Seleção de Amigos:** Criar uma interface que permita busca e múltipla seleção a partir da lista de amigos do usuário para enviar os convites.
-* **Tela do Desafio:** Projetar a tela do desafio, que deve conter um título, a meta geral, a data de término, uma barra de progresso coletiva e uma lista de participantes com suas contribuições e progressos individuais.
+* **Ponto de Entrada:** Um botão de destaque `"Criar Desafio"` será posicionado na tela social principal.
+* **Formulário de Criação:** Um modal será apresentado para a criação do desafio, contendo os campos: `Nome do Desafio` (texto), `Meta` (número e uma unidade pré-definida, ex: "km", "horas", "vezes") e `Data de Término` (seletor de data).
+* **Seleção de Participantes:** Uma interface de busca e múltipla seleção permitirá ao criador convidar amigos da sua lista.
+* **Tela de Acompanhamento:** Uma tela dedicada para cada desafio exibirá o progresso coletivo (barra geral) e o progresso individual de cada participante.
 
 #### Arquitetura e Backend
-
+* **Serviços Envolvidos:** `Sistema de Desafios (Backend)`, `Sistema de Notificação (Backend)`, `Banco de Dados`.
 * **Estrutura de Dados:**
-    * Tabela `Challenges`: `id`, `name`, `goal`, `goal_unit`, `end_date`, `creator_user_id`.
-    * Tabela `Challenge_Participants`: `id`, `challenge_id` (chave estrangeira), `user_id` (chave estrangeira), `progress`, `status` ('pending', 'accepted').
+    * Tabela `Challenges`: `id`, `name`, `goal`, `goal_unit`, `end_date`, `creator_user_id`, `status`.
+    * Tabela `Challenge_Participants`: `id`, `challenge_id`, `user_id`, `progress`, `status` ('pending', 'accepted', 'declined').
 * **API Endpoints:**
-    * `POST /challenges`: Cria um novo desafio e envia os convites.
-    * `GET /challenges`: Lista os desafios dos quais o usuário participa.
-    * `GET /challenges/{id}`: Retorna os detalhes de um desafio específico, incluindo a lista de participantes e seus progressos.
-    * `POST /challenges/{id}/accept`: Para um usuário aceitar um convite de desafio.
-    * `PUT /challenges/{id}/progress`: Para um usuário atualizar seu progresso em um desafio.
+    * `POST /challenges`: Aciona a criação de um novo desafio.
+    * `GET /challenges`: Lista os desafios do usuário (ativos e pendentes).
+    * `GET /challenges/{id}`: Retorna os detalhes de um desafio específico.
+    * `POST /challenges/{id}/accept`: Permite ao usuário aceitar um convite.
+    * `POST /challenges/{id}/decline`: Permite ao usuário recusar um convite.
+    * `PUT /challenges/{id}/progress`: Atualiza o progresso de um participante.
 
 ### 2. Execução (Execution)
 
 #### Desenvolvimento Frontend
-
-1.  Implementar o botão `"Criar Desafio"` e o formulário de criação.
-2.  Desenvolver o componente de seleção de amigos, que consome a lista de amigos via API.
-3.  Construir a tela de visualização do desafio, que busca os dados na API e os renderiza de forma clara (barras de progresso, lista de participantes, etc.).
-4.  Implementar a lógica de notificações para que os usuários vejam os convites para desafios.
+1.  Implementar o fluxo de criação de desafio (botão, modal, formulário e seleção de amigos).
+2.  Construir a tela de visualização do desafio, consumindo os dados da API `GET /challenges/{id}`.
+3.  Integrar com um sistema de notificações para exibir convites pendentes.
+4.  Implementar as ações de aceitar e recusar convites.
 
 #### Desenvolvimento Backend
-
-1.  Implementar a lógica para criar um desafio, salvar os participantes convidados com status `"pending"` e disparar as notificações.
-2.  Criar a lógica que permite aos usuários atualizarem seu progresso. O backend deve validar se o desafio ainda está ativo.
-3.  Desenvolver os endpoints que retornam os dados de desafios para o frontend.
+1.  Implementar a lógica de `POST /challenges`, que deve validar os dados e salvar no banco.
+2.  Após salvar, o serviço deve disparar os convites através do **Sistema de Notificação**.
+3.  Desenvolver a lógica para atualização de progresso, validando se o desafio ainda está ativo.
+4.  Criar os demais endpoints para consulta e gerenciamento dos desafios.
 
 ### 3. Revisão (Testes de Aceitação)
-
-1.  **Verificar Visibilidade do Botão:** Navegar até a interface principal/social e confirmar que o botão `"Criar Desafio"` está visível e acessível.
-2.  **Testar Criação de Desafio:** Preencher o formulário com nome, meta (ex: 20 km) e uma data futura. Confirmar que o desafio é criado com sucesso.
-3.  **Testar Convite de Amigos:** Durante a criação, selecionar 2-3 amigos da lista e finalizar. Logar com a conta de um dos amigos convidados para verificar se o convite foi recebido.
-4.  **Verificar Detalhes do Convite:** Como usuário convidado, abrir o convite e confirmar que todos os detalhes (nome, meta, quem mais foi convidado) estão visíveis.
-5.  **Validar Tela de Progresso:** Fazer com que múltiplos participantes aceitem o convite e registrem progresso. Abrir a tela do desafio e confirmar que o progresso individual de cada um e o progresso coletivo são exibidos e calculados corretamente.
+1.  **Criação e Convite:** Criar um desafio, selecionar 3 amigos e finalizar. Validar se o desafio foi criado e se os 3 amigos receberam a notificação do convite.
+2.  **Aceite e Recusa:** Logar com um amigo, aceitar o convite. Logar com outro amigo, recusar o convite. Verificar se os status de ambos foram atualizados corretamente na tela do desafio.
+3.  **Registro de Progresso:** Registrar progresso para o participante que aceitou. Validar se a barra de progresso individual e a coletiva foram atualizadas corretamente.
+4.  **Visualização de Detalhes:** Como convidado, verificar se todos os detalhes do desafio (meta, participantes, prazo) estão visíveis antes de aceitar.
 
 ---
 
@@ -61,34 +58,32 @@ Aqui está o detalhamento de cada funcionalidade, desde a concepção e planejam
 ### 1. Planejamento (Planning)
 
 #### Design de Interface (UI/UX)
-
-* **Controle de Privacidade:** Adicionar um componente `Switch` ou `Checkbox` com o rótulo `"Tornar este hábito privado"` na tela de criação e edição de hábitos.
-* **Identificação Visual:** Definir um ícone de "cadeado" (🔒) que será exibido ao lado do nome dos hábitos privados na lista pessoal do usuário.
+* **Controle de Privacidade:** Na tela de criação/edição de hábito, um componente `Switch` com o rótulo `"Tornar este hábito privado"` controlará a visibilidade.
+* **Identificação Visual:** Um ícone de cadeado (🔒) será exibido ao lado do nome dos hábitos privados na lista pessoal do usuário.
 
 #### Arquitetura e Backend
-
-* **Estrutura de Dados:** Adicionar uma coluna booleana `is_private` na tabela `Habits`. O valor padrão deve ser `false` (público).
-* **Lógica de Negócio:** Modificar todas as consultas de dados que alimentam áreas sociais (feed de atividades, rankings, desafios) para incluir a condição: `WHERE is_private = false`.
+* **Serviços Envolvidos:** `Sistema de Hábitos (Backend)`, `Banco de Dados`.
+* **Estrutura de Dados:** Adicionar uma coluna booleana `is_private` na tabela `Habits` (padrão: `false`).
+* **Lógica de Negócio:**
+    * Todas as consultas que alimentam áreas sociais (feed, rankings) **devem** incluir a condição `WHERE is_private = false`.
+    * Definir regra de negócio para atividades passadas quando um hábito se torna privado (se devem ser removidas retroativamente).
 
 ### 2. Execução (Execution)
 
 #### Desenvolvimento Frontend
-
-1.  Implementar o controle de privacidade (switch/checkbox) no formulário de hábitos.
-2.  Na tela que lista os hábitos do usuário, adicionar uma lógica para exibir o ícone de cadeado se o campo `is_private` do hábito for `true`.
+1.  Implementar o `Switch` de privacidade no formulário de criação/edição de hábito.
+2.  Adicionar a lógica para exibir condicionalmente o ícone de cadeado na lista de hábitos.
 
 #### Desenvolvimento Backend
-
 1.  Atualizar os endpoints `POST /habits` e `PUT /habits/{id}` para receber e salvar o valor `is_private`.
-2.  Refatorar os endpoints que retornam dados sociais (`GET /feed`, `GET /ranking`) para que eles filtrem e excluam rigorosamente os hábitos privados e suas pontuações.
+2.  Refatorar todos os endpoints de dados sociais (`GET /feed`, `GET /ranking`, etc.) para aplicar o filtro de privacidade rigorosamente.
 
 ### 3. Revisão (Testes de Aceitação)
-
-1.  **Testar Opção de Privacidade:** Criar um novo hábito e marcar a opção `"Privado"`. Salvar e editar novamente para garantir que a opção permaneceu marcada.
-2.  **Verificar Feed de Amigos:** Logar com uma conta de amigo e verificar se o hábito privado criado **não** aparece no feed de atividades.
-3.  **Confirmar Identificação Visual:** Logar como o dono do hábito e verificar se o ícone de cadeado é exibido ao lado do hábito na sua lista pessoal.
-4.  **Validar Não Contabilização de Pontos:** Participar de um ranking. Concluir um hábito privado e verificar que a pontuação do ranking **não** foi alterada.
-5.  **Testar Alteração de Privacidade:** Editar um hábito privado, desmarcar a opção e salvar. Logar como amigo e confirmar que o hábito **agora aparece** no feed. Fazer o processo inverso e confirmar que ele some novamente.
+1.  **Criação Privada:** Criar um novo hábito e marcá-lo como "Privado". Verificar se o ícone de cadeado aparece na lista.
+2.  **Verificação de Feed:** Logar com a conta de um amigo e confirmar que o hábito privado e suas atividades **não** aparecem no feed.
+3.  **Isolamento de Pontuação:** Concluir um hábito privado e verificar que a pontuação em rankings públicos **não** foi alterada.
+4.  **Alteração de Privacidade:** Editar um hábito privado, torná-lo público e salvar. Verificar se ele **agora aparece** no feed do amigo. Fazer o processo inverso e confirmar que ele some novamente.
+5.  **Teste de Retroatividade:** Tornar um hábito com histórico público em privado e verificar se suas atividades passadas são removidas do feed de amigos.
 
 ---
 
@@ -99,41 +94,37 @@ Aqui está o detalhamento de cada funcionalidade, desde a concepção e planejam
 ### 1. Planejamento (Planning)
 
 #### Design de Interface (UI/UX)
-
-* **Opção de Conclusão:** Adicionar uma opção `"Marcar como Concluído"` na tela de edição ou nos detalhes de um hábito.
-* **Seção de Troféus:** Criar uma nova seção no perfil do usuário chamada `"Meus Troféus"` ou `"Conquistas"`.
-* **Card de Troféu:** Projetar o card de "Troféu", que exibirá o nome do hábito, um ícone, a **maior sequência (streak)** alcançada e a **data de conclusão**.
-* **Botão de Recomeço:** Incluir um botão `"Começar de Novo"` em cada troféu, que facilitará a criação de um hábito idêntico.
+* **Opção de Conclusão:** Na tela de detalhes de um hábito, adicionar uma opção `"Marcar como Concluído"`.
+* **Seção de Conquistas:** Criar uma nova área no perfil do usuário chamada `"Meus Troféus"`.
+* **Card de Troféu:** Projetar um card para cada troféu, exibindo o nome do hábito, a maior sequência (`streak`) e a data de conclusão.
+* **Funcionalidades do Troféu:** Incluir um botão `"Começar de Novo"` para recriar o hábito e considerar uma opção de `"Reativar Hábito"`.
 
 #### Arquitetura e Backend
-
+* **Serviços Envolvidos:** `Sistema de Hábitos (Backend)`, `Banco de Dados`.
 * **Estrutura de Dados:**
-    * Adicionar uma coluna `status` na tabela `Habits` (ex: 'active', 'completed').
-    * Adicionar colunas `completed_at` (timestamp) e `final_streak` (integer) para armazenar o resumo.
+    * Adicionar uma coluna `status` na tabela `Habits` (valores: 'active', 'completed').
+    * Adicionar colunas `completed_at` (timestamp) e `final_streak` (integer).
 * **API Endpoints:**
-    * `POST /habits/{id}/complete`: Endpoint para marcar o hábito como concluído.
-    * `GET /habits?status=active`: Modificar o endpoint existente para retornar apenas os hábitos ativos por padrão.
-    * `GET /trophies` (ou `GET /habits?status=completed`): Novo endpoint para listar os hábitos concluídos (troféus).
+    * `POST /habits/{id}/complete`: Marca o hábito como concluído.
+    * `GET /habits?status=active`: Endpoint principal para a lista diária.
+    * `GET /trophies` (ou `GET /habits?status=completed`): Para a seção "Meus Troféus".
 
 ### 2. Execução (Execution)
 
 #### Desenvolvimento Frontend
-
-1.  Implementar a opção `"Marcar como Concluído"` e a chamada à API correspondente.
-2.  Filtrar a lista de hábitos diários para exibir apenas os que têm status `active`.
-3.  Construir a tela `"Meus Troféus"`, que consome os dados do novo endpoint.
-4.  Implementar a funcionalidade do botão `"Começar de Novo"`, que deve levar o usuário à tela de criação de hábito com os campos já preenchidos.
+1.  Implementar a opção "Marcar como Concluído" e a chamada à API correspondente.
+2.  Filtrar a lista de hábitos diários para exibir apenas os de status `active`.
+3.  Construir a tela "Meus Troféus" consumindo os dados do endpoint `/trophies`.
+4.  Implementar a funcionalidade do botão "Começar de Novo", que pré-preenche a tela de criação.
 
 #### Desenvolvimento Backend
-
-1.  Criar a lógica no endpoint `/complete` que altera o `status` do hábito, registra a data de conclusão e armazena a maior sequência alcançada.
-2.  Garantir que as notificações e lógicas diárias ignorem os hábitos com status `completed`.
-3.  Implementar o endpoint que retorna a lista de troféus para o frontend.
+1.  Criar a lógica no endpoint `/complete` que altera o status, registra a data e armazena a `streak` final.
+2.  Garantir que os sistemas de notificação e agendamento de tarefas diárias ignorem hábitos com status `completed`.
+3.  Implementar o endpoint que retorna a lista de troféus.
 
 ### 3. Revisão (Testes de Aceitação)
-
-1.  **Testar Opção de Conclusão:** Acessar um hábito ativo e usar a opção `"Marcar como Concluído"`.
-2.  **Verificar Remoção da Lista Diária:** Após marcar como concluído, voltar à lista de hábitos diários e confirmar que ele não está mais lá.
-3.  **Confirmar Criação do Troféu:** Navegar até a seção `"Meus Troféus"` e confirmar que o hábito concluído está listado.
-4.  **Validar Resumo do Desempenho:** Verificar se o troféu exibe corretamente a maior sequência (streak) que o hábito tinha e a data em que foi concluído.
-5.  **Testar Recriação do Hábito:** Clicar no botão `"Começar de Novo"` em um troféu. Confirmar que a tela de criação é aberta com as informações do hábito antigo já preenchidas.
+1.  **Conclusão de Hábito:** Marcar um hábito como "Concluído".
+2.  **Validação de Listas:** Confirmar que o hábito foi **removido** da lista diária e **adicionado** à seção "Meus Troféus".
+3.  **Verificação de Dados:** No troféu, verificar se a maior `streak` e a data de conclusão estão corretas.
+4.  **Teste de Recriação:** Clicar em "Começar de Novo" e confirmar que a tela de criação é aberta com os dados do hábito original pré-preenchidos.
+5.  **Teste de Notificações:** No dia seguinte à conclusão, verificar que o usuário **não** recebe mais notificações sobre aquele hábito.
