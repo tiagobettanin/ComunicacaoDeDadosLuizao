@@ -46,3 +46,100 @@ atenuação: f mais altos se atenu masi rapido
 
 ------------------Aula3-Slide02------------------
 ver mais sobre frequencia e taxa de amostragrem
+
+
+-0.04575749056
+
+2-
+-10 = 10* log(P2/5)
+-1= log(P2/5)
+10^-1=p2/5
+0,5W =p2
+
+3-
+p1--amp--medir--amp--medi--amp==medi---p2
+ganho 12db
+amplificaçõa  - suponde ser 1w
+12=10 log(p2/1)
+p2=15.84 W
+
+12db equivale a um aumneto de 15 vezes
+
+4-
+265 000 = 2*20 000*log2(l)     /000
+6.625=log2(L)
+l=2^6.625
+L=99
+Mas na realidade seria 128 para conseguir atingir a taxa
+
+5-
+SNR = 10/(5/10^-3)
+SNR = 2000
+
+C = 4 000 * log2(1+2000)
+C = 4 000 * 
+C = 43866 bps
+
+6-
+2*10^6B = 16*10^6b
+
+Tempo = 16*10^6/2*10^6
+Tempo = 285s
+
+tempo = 16*10^6/10^6
+    =   16s
+
+7-
+B=20000, SNR db = 40
+
+C = B * log2(1+SNR)
+Convertendo snrdb para snr
+snrdb = 10*log(snr)
+40=10*log(snr)
+4  = log(snr)
+snr = 10 000
+
+
+C = 20 000 * log2(1+10 000)
+C = 265 * 10^3 bps
+
+9-
+f= 2 * a moior frequecnai
+f = 2 * 200k
+f= 400khZ
+
+
+ouvido humano 20Hz- 22kHz
+f= 2 * fmax
+f= 2 * 22
+f= 44kHz
+frequecnai do cd
+44kHz por 8bpz, ou seja a cada segundo 44k amostra de 8bit são capturadas
+log2(l)=B
+l=2^b
+l=256, niveis diferenets
+
+------------------Aula5-Slide03------------------
+O blidado funciona como uma gaiola de fahradei, tipo telefone no elevador
+
+10BASE-T - até 10mb/s
+
+slide 10 a atenuação sobe em 1.4 pq frequencai daquele complimento de onda o materia absorve um pouco o sinal
+oq atenuação
+
+------------------Aula6-Slide04------------------
+`Para antena dipolo
+102.9MHz
+
+antena = lambda/2
+antena = 2,9145/2
+antena = 1,577 metros
+
+lambda = v*T
+= 3*10^8*9,718*10^-9
+lambda = 2,9145 metros
+
+
+4-QAM = 2 bits por sinal
+8-QAM = 3 bits por sinal
+
