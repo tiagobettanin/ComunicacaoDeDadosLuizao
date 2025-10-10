@@ -1,0 +1,10 @@
+oq significa ser normalizado?
+ver sobre amostragem, quantização
+oq snr significa?
+
+Filtro passa baixo: elimina altas freqencias
+Modulação delta? problema 1 se o sinal mudar muito rapido, e 2 se o sinal mudar muito devagar
+modifica o delta ou taxa de amostragem resolbe (mas é cusotoso por harware)
+
+
+
