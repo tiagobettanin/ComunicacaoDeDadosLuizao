@@ -1,0 +1,4 @@
+estudar a transmissão do ethernet slide 5
+
+pq o mouse só nã manda os dados , pq tem que avisar?
+
