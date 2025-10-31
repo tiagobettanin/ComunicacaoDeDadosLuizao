@@ -1,0 +1,8 @@
+hamming, quantidade de bits diferentes
+
+Distanci minima de hamming, n minimo bits trocados para o cdogio ser mal interjpretado
+
+Detecção de erros em blocos de dados, pq usa a concatenaõ(inverte)  a soma?
+
+
+carrybti, pega e somo denovo
